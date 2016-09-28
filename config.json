@@ -1,0 +1,19 @@
+{
+	"work": {
+		"argument": "w",
+		"value": 25,
+		"description": "Time for working interval (default 25 minutes)"
+	},
+	"smallRest": {
+		"argument": "sr",
+		"value": 5,
+		"description": "Time for small rest between working intervals (default 5 minutes)",
+		"message": "Working interval is over. Please rest."
+	},
+	"bigRest": {
+		"argument": "br",
+		"value": 15,
+		"description": "Time for small rest between working intervals (default 15 minutes)",
+		"message": "You work so long. Please stand up and walk."
+	}
+}
