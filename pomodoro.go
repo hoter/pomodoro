@@ -43,6 +43,7 @@ type Rest struct {
 }
 
 func main() {
+	// Get configuration settings from thespecific file
 	configFile, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println("File config.json was not found, please check.")
@@ -50,13 +51,12 @@ func main() {
 	}
 	defer configFile.Close()
 
+	// Initialize a new Pomodoro application
 	var pomodoro Pomodoro
 	if err = json.NewDecoder(configFile).Decode(&pomodoro); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-
-	// Initialize a new Pomodoro application
 	work := flag.Int(pomodoro.Work.Argument, pomodoro.Work.Value, pomodoro.Work.Description)
 	smallRest := flag.Int(pomodoro.SmallRest.Argument, pomodoro.SmallRest.Value, pomodoro.SmallRest.Description)
 	bigRest := flag.Int(pomodoro.BigRest.Argument, pomodoro.BigRest.Value, pomodoro.BigRest.Description)
@@ -65,6 +65,7 @@ func main() {
 	pomodoro.SmallRest.Value = *smallRest
 	pomodoro.BigRest.Value = *bigRest
 
+	// Working process
 	for {
 		for step := 0; step < 3; step++ {
 			pomodoro.processWork()
