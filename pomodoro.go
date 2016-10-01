@@ -43,7 +43,7 @@ type Rest struct {
 }
 
 func main() {
-	// Get configuration settings from thespecific file
+	// Get configuration settings from the specific file
 	configFile, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println("File config.json was not found, please check.")
