@@ -13,6 +13,23 @@ type Pomodoro struct {
 	SmallRest, BigRest Rest
 }
 
+func (p *Pomodoro) processWork() {
+	timer := time.NewTimer(time.Minute * time.Duration(p.Work.Value))
+	<-timer.C
+}
+
+func (p *Pomodoro) processSmallRest() {
+	fmt.Println(p.SmallRest.Message)
+	timer := time.NewTimer(time.Minute * time.Duration(p.SmallRest.Value))
+	<-timer.C
+}
+
+func (p *Pomodoro) processBigRest() {
+	fmt.Println(p.BigRest.Message)
+	timer := time.NewTimer(time.Minute * time.Duration(p.BigRest.Value))
+	<-timer.C
+}
+
 type Work struct {
 	Argument    string
 	Value       int
@@ -48,19 +65,12 @@ func main() {
 	pomodoro.SmallRest.Value = *smallRest
 	pomodoro.BigRest.Value = *bigRest
 
-	var timer *time.Timer
 	for {
 		for step := 0; step < 3; step++ {
-			timer = time.NewTimer(time.Minute * time.Duration(pomodoro.Work.Value))
-			<-timer.C
-			fmt.Println(pomodoro.SmallRest.Message)
-			timer = time.NewTimer(time.Minute * time.Duration(pomodoro.SmallRest.Value))
-			<-timer.C
+			pomodoro.processWork()
+			pomodoro.processSmallRest()
 		}
-		timer = time.NewTimer(time.Minute * time.Duration(pomodoro.Work.Value))
-		<-timer.C
-		fmt.Println(pomodoro.BigRest.Message)
-		timer = time.NewTimer(time.Minute * time.Duration(pomodoro.BigRest.Value))
-		<-timer.C
+		pomodoro.processWork()
+		pomodoro.processBigRest()
 	}
 }
