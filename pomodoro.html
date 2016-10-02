@@ -2,6 +2,13 @@
 <html>
 	<head>
 		<title>Pomodoro settings</title>
+		<style>
+			label {
+				width: 100px;
+				height: 25px;
+				display: inline-block;
+			}
+		</style>
 	</head>
 	<body>
 		<form method="POST" action="/config">
@@ -63,6 +70,8 @@
 					<input type="text" name="br_message" />
 				</div>
 			</fieldset>
+			
+			<input type="submit" value="Save" />
 		</form>
 	</body>
 </html>
