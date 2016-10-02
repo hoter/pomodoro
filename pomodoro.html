@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Pomodoro settings</title>
+	</head>
+	<body>
+		<form method="POST" action="/config">
+			<label for="port">Port</label>
+			<input type="number" name="port" />
+			
+			<fieldset>
+				<legend>Work</legend>
+				<div>
+					<label for="work_arg">Argument</label>
+					<input type="text" name="work_arg" />
+				</div>
+				<div>
+					<label for="work_value">Value</label>
+					<input type="number" name="work_value" />
+				</div>
+				<div>
+					<label for="work_desc">Description</label>
+					<input type="text" name="work_desc" />
+				</div>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Small rest</legend>
+				<div>
+					<label for="sr_arg">Argument</label>
+					<input type="text" name="sr_arg" />
+				</div>
+				<div>
+					<label for="sr_value">Value</label>
+					<input type="number" name="sr_value" />
+				</div>
+				<div>
+					<label for="sr_desc">Description</label>
+					<input type="text" name="sr_desc" />
+				</div>
+				<div>
+					<label for="sr_message">Message</label>
+					<input type="text" name="sr_message" />
+				</div>
+			</fieldset>
+			
+			<fieldset>
+				<legend>Big rest</legend>
+				<div>
+					<label for="br_arg">Argument</label>
+					<input type="text" name="br_arg" />
+				</div>
+				<div>
+					<label for="br_value">Value</label>
+					<input type="number" name="br_value" />
+				</div>
+				<div>
+					<label for="br_desc">Description</label>
+					<input type="text" name="br_desc" />
+				</div>
+				<div>
+					<label for="br_message">Message</label>
+					<input type="text" name="br_message" />
+				</div>
+			</fieldset>
+		</form>
+	</body>
+</html>

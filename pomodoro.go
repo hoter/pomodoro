@@ -4,13 +4,29 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"html/template"
+	"net/http"
 	"os"
+	"strconv"
 	"time"
 )
 
 type Pomodoro struct {
+	Port               int
 	Work               Work
 	SmallRest, BigRest Rest
+}
+
+func (p *Pomodoro) configFormHandler(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("pomodoro.html")
+	t.Execute(w, nil)
+}
+
+func (p *Pomodoro) runServer() {
+	if p.Port != 0 {
+		http.HandleFunc("/", p.configFormHandler)
+		http.ListenAndServe(":"+strconv.Itoa(p.Port), nil)
+	}
 }
 
 func (p *Pomodoro) processWork() {
@@ -64,6 +80,9 @@ func main() {
 	pomodoro.Work.Value = *work
 	pomodoro.SmallRest.Value = *smallRest
 	pomodoro.BigRest.Value = *bigRest
+
+	// Allow to users change settings
+	pomodoro.runServer()
 
 	// Working process
 	for {
