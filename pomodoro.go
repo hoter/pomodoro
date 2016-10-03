@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"strconv"
@@ -18,8 +19,27 @@ type Pomodoro struct {
 }
 
 func (p *Pomodoro) configFormHandler(w http.ResponseWriter, r *http.Request) {
-	t, _ := template.ParseFiles("pomodoro.html")
-	t.Execute(w, nil)
+	if r.Method == "GET" {
+		t, _ := template.ParseFiles("pomodoro.html")
+		t.Execute(w, nil)
+	} else {
+		r.ParseForm()
+		p.Port, _ = strconv.Atoi(r.FormValue("Port"))
+		p.Work.Argument = r.FormValue("Work.Argument")
+		p.Work.Description = r.FormValue("Work.Description")
+		p.Work.Value, _ = strconv.Atoi(r.FormValue("Work.Value"))
+		p.SmallRest.Argument = r.FormValue("SmallRest.Argument")
+		p.SmallRest.Description = r.FormValue("SmallRest.Description")
+		p.SmallRest.Value, _ = strconv.Atoi(r.FormValue("SmallRest.Value"))
+		p.SmallRest.Message = r.FormValue("SmallRest.Message")
+		p.BigRest.Argument = r.FormValue("BigRest.Argument")
+		p.BigRest.Description = r.FormValue("BigRest.Description")
+		p.BigRest.Value, _ = strconv.Atoi(r.FormValue("BigRest.Value"))
+		p.BigRest.Message = r.FormValue("BigRest.Message")
+
+		configJson, _ := json.Marshal(p)
+		ioutil.WriteFile("config.json", configJson, 0644)
+	}
 }
 
 func (p *Pomodoro) runServer() {
