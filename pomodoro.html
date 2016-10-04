@@ -13,21 +13,21 @@
 	<body>
 		<form method="POST" action="/">
 			<label for="Port">Port</label>
-			<input type="number" name="Port" />
+			<input type="number" name="Port" value="{{.Port}}" />
 			
 			<fieldset>
 				<legend>Work</legend>
 				<div>
 					<label for="Work.Argument">Argument</label>
-					<input type="text" name="Work.Argument" />
+					<input type="text" name="Work.Argument" value="{{.Work.Argument}}" />
 				</div>
 				<div>
 					<label for="Work.Value">Value</label>
-					<input type="number" name="Work.Value" />
+					<input type="number" name="Work.Value" value="{{.Work.Value}}" />
 				</div>
 				<div>
 					<label for="Work.Description">Description</label>
-					<input type="text" name="Work.Description" />
+					<input type="text" name="Work.Description" value="{{.Work.Description}}" />
 				</div>
 			</fieldset>
 			
@@ -35,19 +35,19 @@
 				<legend>Small rest</legend>
 				<div>
 					<label for="SmallRest.Argument">Argument</label>
-					<input type="text" name="SmallRest.Argument" />
+					<input type="text" name="SmallRest.Argument" value="{{.SmallRest.Argument}}" />
 				</div>
 				<div>
 					<label for="SmallRest.Value">Value</label>
-					<input type="number" name="SmallRest.Value" />
+					<input type="number" name="SmallRest.Value" value="{{.SmallRest.Value}}" />
 				</div>
 				<div>
 					<label for="SmallRest.Description">Description</label>
-					<input type="text" name="SmallRest.Description" />
+					<input type="text" name="SmallRest.Description" value="{{.SmallRest.Description}}" />
 				</div>
 				<div>
 					<label for="SmallRest.Message">Message</label>
-					<input type="text" name="SmallRest.Message" />
+					<input type="text" name="SmallRest.Message" value="{{.SmallRest.Message}}" />
 				</div>
 			</fieldset>
 			
@@ -55,19 +55,19 @@
 				<legend>Big rest</legend>
 				<div>
 					<label for="BigRest.Argument">Argument</label>
-					<input type="text" name="BigRest.Argument" />
+					<input type="text" name="BigRest.Argument" value="{{.BigRest.Argument}}" />
 				</div>
 				<div>
 					<label for="BigRest.Value">Value</label>
-					<input type="number" name="BigRest.Value" />
+					<input type="number" name="BigRest.Value" value="{{.BigRest.Value}}" />
 				</div>
 				<div>
 					<label for="BigRest.Description">Description</label>
-					<input type="text" name="BigRest.Description" />
+					<input type="text" name="BigRest.Description" value="{{.BigRest.Description}}" />
 				</div>
 				<div>
 					<label for="BigRest.Message">Message</label>
-					<input type="text" name="BigRest.Message" />
+					<input type="text" name="BigRest.Message" value="{{.BigRest.Message}}" />
 				</div>
 			</fieldset>
 			

@@ -21,7 +21,7 @@ type Pomodoro struct {
 func (p *Pomodoro) configFormHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		t, _ := template.ParseFiles("pomodoro.html")
-		t.Execute(w, nil)
+		t.Execute(w, p)
 	} else {
 		r.ParseForm()
 		p.Port, _ = strconv.Atoi(r.FormValue("Port"))
