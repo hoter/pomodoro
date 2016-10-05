@@ -102,7 +102,7 @@ func main() {
 	pomodoro.BigRest.Value = *bigRest
 
 	// Allow to users change settings
-	pomodoro.runServer()
+	go pomodoro.runServer()
 
 	// Working process
 	for {
