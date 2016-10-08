@@ -10,12 +10,15 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/0xAX/notificator"
 )
 
 type Pomodoro struct {
 	Port               int
 	Work               Work
 	SmallRest, BigRest Rest
+	notify             *notificator.Notificator
 }
 
 func (p *Pomodoro) configFormHandler(w http.ResponseWriter, r *http.Request) {
@@ -55,15 +58,27 @@ func (p *Pomodoro) processWork() {
 }
 
 func (p *Pomodoro) processSmallRest() {
-	fmt.Println(p.SmallRest.Message)
+	notify := p.getNotificator()
+	notify.Push("Pomodoro", p.SmallRest.Message, "", notificator.UR_NORMAL)
 	timer := time.NewTimer(time.Minute * time.Duration(p.SmallRest.Value))
 	<-timer.C
 }
 
 func (p *Pomodoro) processBigRest() {
-	fmt.Println(p.BigRest.Message)
+	notify := p.getNotificator()
+	notify.Push("Pomodoro", p.BigRest.Message, "", notificator.UR_NORMAL)
 	timer := time.NewTimer(time.Minute * time.Duration(p.BigRest.Value))
 	<-timer.C
+}
+
+// Singleton
+func (p *Pomodoro) getNotificator() *notificator.Notificator {
+	if p.notify == nil {
+		p.notify = notificator.New(notificator.Options{
+			AppName: "Pomodoro",
+		})
+	}
+	return p.notify
 }
 
 type Work struct {
@@ -102,7 +117,7 @@ func main() {
 	pomodoro.BigRest.Value = *bigRest
 
 	// Allow to users change settings
-	pomodoro.runServer()
+	go pomodoro.runServer()
 
 	// Working process
 	for {
